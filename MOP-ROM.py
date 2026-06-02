@@ -56,7 +56,7 @@ class AuthWindow:
 
             # --- Licence check with decryption ---
             from cryptography.fernet import Fernet
-            FERNET_KEY = b"PASTE-YOUR-GENERATED-KEY-HERE"  # same key you used to encrypt JSON
+            FERNET_KEY = b"oMSJG6m1FUmY4Rm4BznKQq3tSd6d99GwH0s6KN46V8k="  # same key you used to encrypt JSON
             cipher = Fernet(FERNET_KEY)
 
             licence = data["licence"]
