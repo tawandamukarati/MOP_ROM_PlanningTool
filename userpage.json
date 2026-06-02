@@ -1,0 +1,15 @@
+{
+  "users": [
+    {
+  "username": "GeoMate1024",
+  "password_hash": "620998b6e7c12edf4fa17b4993aadf9284fb72f5727f0446cdcd26514eede774",
+  "passkey_hash": "14736013d6f0cc01c7d7682c80d70a7abb167f0957d3130cc8e1a2261d6bad3c",
+  "role": "admin"
+}
+  ],
+  "licence": {
+    "active": true,
+    "valid_until": "2026-12-31",
+    "max_users": 10
+  }
+}
