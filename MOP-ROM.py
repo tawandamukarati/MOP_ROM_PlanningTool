@@ -54,16 +54,28 @@ class AuthWindow:
             response.raise_for_status()
             data = response.json()
 
-            # Licence check
+            # --- Licence check with decryption ---
+            from cryptography.fernet import Fernet
+            FERNET_KEY = b"PASTE-YOUR-GENERATED-KEY-HERE"  # same key you used to encrypt JSON
+            cipher = Fernet(FERNET_KEY)
+
             licence = data["licence"]
-            if not licence["active"]:
+
+            valid_until_dec = cipher.decrypt(
+                licence["valid_until_enc"].encode()
+            ).decode()
+
+            active_dec = cipher.decrypt(
+                licence["active_enc"].encode()
+            ).decode()
+
+            if active_dec.lower() != "true":
                 messagebox.showerror("Access Denied", "Licence inactive")
                 return
-            if datetime.now().strftime("%Y-%m-%d") > licence["valid_until"]:
+            if datetime.now().strftime("%Y-%m-%d") > valid_until_dec:
                 messagebox.showerror("Access Denied", "Licence expired")
                 return
-
-            # User check
+            # --- User check ---
             for user in data["users"]:
                 if user["username"] == username:
                     pw_hash = hashlib.sha256(password.encode()).hexdigest()
@@ -74,9 +86,9 @@ class AuthWindow:
                         return
 
             messagebox.showerror("Access Denied", "Invalid credentials")
+            
         except Exception as e:
             messagebox.showerror("Error", f"Failed to validate licence:\n{e}")
-
 # =========================================================
 # MAIN GUI CLASS
 # =========================================================
