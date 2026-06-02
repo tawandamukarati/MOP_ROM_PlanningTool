@@ -8,8 +8,8 @@
 }
   ],
   "licence": {
-    "active": false,
-    "valid_until": "2026-12-31",
+    "active": true,
+    "valid_until": "2026-08-31",
     "max_users": 10
   }
 }
